@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+    db:
+        container_name: db
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=postgres_db
+        image: postgres
+        networks:
+            - LockkliyeNetwork
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+
+    lockkliye_backend:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+            network: host
+        command: python manage.py runserver 0.0.0.0:3000
+        container_name: lockkliye_backend
+        depends_on:
+            - db
+        env_file:
+            - ./.env.dev
+        image: lockkliye_backend
+        networks:
+            - LockkliyeNetwork
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/lockkliye_backend
+
+networks:
+    LockkliyeNetwork:
+        driver: bridge
+        external: true
+        name: LockkliyeNetwork
+
+volumes:
+    postgres_data:

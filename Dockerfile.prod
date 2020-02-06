@@ -1,0 +1,21 @@
+FROM python:3.6
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Creating lockkliye_backend workspace
+RUN mkdir /lockkliye_backend
+WORKDIR /lockkliye_backend
+
+# Updating internal debian to newest version
+RUN apt-get update -y
+
+COPY requirements.txt /lockkliye_backend/
+
+# Installing python-dependencies
+RUN pip install -r requirements.txt
+
+# Copy source code over
+COPY . /lockkliye_backend/
+
+ENTRYPOINT ["/lockkliye_backend/entrypoint.prod.sh"]
