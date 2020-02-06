@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f ../../../docker-compose.dev.yml up
+sh ../createNetwork.sh && docker-compose -f ../../../docker-compose.dev.yml up

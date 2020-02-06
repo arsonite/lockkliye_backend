@@ -3,20 +3,20 @@ FROM python:3.6
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Creating lockkliye_backend workspace
-RUN mkdir /lockkliye_backend
-WORKDIR /lockkliye_backend
+# Creating lockkliye_restapi workspace
+RUN mkdir /lockkliye_restapi
+WORKDIR /lockkliye_restapi
 
 # Updating internal debian to newest version
 RUN apt-get update -y
 RUN apt-get install -y netcat
 
-COPY requirements.txt /lockkliye_backend/
+COPY requirements.txt /lockkliye_restapi/
 
 # Installing python-dependencies
 RUN pip install -r requirements.txt
 
 # Copy source code over
-COPY . /lockkliye_backend/
+COPY . /lockkliye_restapi/
 
-ENTRYPOINT ["/lockkliye_backend/entrypoint.dev.sh"]
+ENTRYPOINT ["/lockkliye_restapi/entrypoint.dev.sh"]

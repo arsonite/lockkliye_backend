@@ -1,4 +1,3 @@
 #!/bin/sh
 
-docker network create VisionService
-docker-compose -f ../../../docker-compose.dev.yml build
+sh ../createNetwork.sh && docker-compose -f ../../../docker-compose.dev.yml build
