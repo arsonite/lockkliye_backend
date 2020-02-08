@@ -18,7 +18,7 @@ services:
             context: .
             dockerfile: Dockerfile.prod
             network: host
-        command: python manage.py runserver 0.0.0.0:3000
+        command: python manage.py runserver 0.0.0.0:8000
         container_name: lockkliye_restapi
         depends_on:
             - db
@@ -28,7 +28,7 @@ services:
         networks:
             - lockkliye_local
         ports:
-            - 3000:3000
+            - 8080:8000
         volumes:
             - .:/lockkliye_restapi
 
