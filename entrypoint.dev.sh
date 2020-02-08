@@ -10,7 +10,7 @@ fi
 
 # python manage.py flush --no-input
 python manage.py makemigrations notes --noinput
-python manage.py makemigrations processing --noinput
+python manage.py makemigrations server --noinput
 python manage.py makemigrations workbench --noinput
 python manage.py migrate --noinput
 
