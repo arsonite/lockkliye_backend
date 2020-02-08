@@ -19,14 +19,13 @@ class Workbenches(LIST, CREATE, GENERIC):
     """
 
     def get(self, request, *args, **kwargs):
-        pk = kwargs['pk']
         response = {}
         return Response(status=status.HTTP_200_OK, content_type='application/json')
 
     def post(self, request, *args, **kwargs):
-        pk = kwargs['pk']
-        response = {}
-        return Response(json.loads(response), status=status.HTTP_200_OK, content_type='application/json')
+        data = json.loads(request.body)
+        response = dict()
+        return Response(response, status=status.HTTP_200_OK, content_type='application/json')
 
 
 class Workbench(RETRIEVE, UPDATE, DESTROY, GENERIC):

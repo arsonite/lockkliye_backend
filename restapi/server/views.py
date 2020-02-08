@@ -15,11 +15,6 @@ DESTROY = mixins.DestroyModelMixin
 
 class Server(RETRIEVE, UPDATE, DESTROY, GENERIC):
     def get(self, request, *args, **kwargs):
-        pk = kwargs['pk']
-        response = {}
+        data = json.loads(request.body)
+        response = dict()
         return Response(response, status=status.HTTP_200_OK, content_type='application/json')
-
-    def post(self, request, *args, **kwargs):
-        pk = kwargs['pk']
-        response = {}
-        return Response(json.loads(response), status=status.HTTP_200_OK, content_type='application/json')
