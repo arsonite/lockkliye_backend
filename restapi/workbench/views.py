@@ -13,9 +13,9 @@ UPDATE = mixins.UpdateModelMixin
 DESTROY = mixins.DestroyModelMixin
 
 
-class Notes(LIST, CREATE, GENERIC):
+class Workbenches(LIST, CREATE, GENERIC):
     """
-        REST-API for 'Note'-collection
+        REST-API for 'Workbench'-collection
     """
 
     def get(self, request, *args, **kwargs):
@@ -29,9 +29,9 @@ class Notes(LIST, CREATE, GENERIC):
         return Response(json.loads(response), status=status.HTTP_200_OK, content_type='application/json')
 
 
-class Note(RETRIEVE, UPDATE, DESTROY, GENERIC):
+class Workbench(RETRIEVE, UPDATE, DESTROY, GENERIC):
     """
-        REST-API for single 'Note'-instances
+        REST-API for single 'Workbench'-instances
     """
 
     def get(self, request, *args, **kwargs):

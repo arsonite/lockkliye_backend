@@ -5,51 +5,55 @@ from django.db.models.signals import pre_delete, post_delete
 from django.dispatch import receiver
 
 
-class Dataset(models.Model):
-    id = models.CharField(max_length=64, primary_key=True,
+class Label(models.Model):
+    id = models.CharField(max_length=64, primary_key=True, unique=True,
                           default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=64)
-    author = models.CharField(max_length=64)
+    color = models.CharField(max_length=6, unique=True, editable=True)
+    title = models.CharField(max_length=256, unique=True, editable=True)
+    description = models.CharField(max_length=512, unique=True, editable=True)
 
 
-"""
-class Action(models.Model):
-    id = models.CharField(max_length=64, primary_key=True,
+class Note(models.Model):
+    id = models.CharField(max_length=64, primary_key=True, unique=True,
                           default=uuid.uuid4, editable=False)
-    rank = models.PositiveIntegerField()
-    maxRank = models.PositiveIntegerField()
-    percentage = models.DecimalField(max_digits=12, decimal_places=8)
-    imagepath = models.CharField(max_length=512)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    objectlabel = models.CharField(
-        max_length=256, null=True, blank=True, editable=True)
-    obj = models.ForeignKey(
-        Object,
-        on_delete=models.SET_NULL,
-        related_name="actions",
-        null=True,
+    title = models.CharField(max_length=256, editable=True)
+    content = models.TextField(editable=True)
+    labels = models.ManyToManyField(
+        Label,
+        related_name='noteLabels',
     )
 
-@receiver(pre_delete, sender=Object)
-def handlePreDelete(sender, **kwargs):
-    pass
-    instance = kwargs['instance']
-    actions = instance.actions.all()
-    if(len(actions) > 0):
-        for action in actions:
-            action.objectlabel = instance.label
-            action.save()
 
-@receiver(pre_delete, sender=Object)
-def handlePostDelete(sender, **kwargs):
-    pass
-    instance = kwargs['instance']
-    actions = instance.actions.all()
-    if(len(actions) > 0):
-        for action in actions:
-            action.objectlabel = instance.label
-            action.save()
-            
-pre_delete.connect(handlePreDelete, sender=Object)
-post_delete.connect(handlePostDelete, sender=Object)
-"""
+class List(models.Model):
+    id = models.CharField(max_length=64, primary_key=True, unique=True,
+                          default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=256, editable=True)
+    labels = models.ManyToManyField(
+        Label,
+        related_name='listLabels'
+    )
+
+
+class Folder(models.Model):
+    id = models.CharField(max_length=64, primary_key=True, unique=True,
+                          default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=256, null=True,
+                             blank=True, editable=True)
+    subfolders = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        related_name='folders',
+        null=True,
+    )
+    notes = models.ForeignKey(
+        Note,
+        on_delete=models.SET_NULL,
+        related_name='notes',
+        null=True,
+    )
+    lists = models.ForeignKey(
+        List,
+        on_delete=models.SET_NULL,
+        related_name='lists',
+        null=True,
+    )

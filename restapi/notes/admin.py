@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-# Registering models for admin page
+from .models import Folder, Label, List, Note
 
-# from .models import Action
-# admin.site.register(Action)
+admin.site.register(Folder)
+admin.site.register(Label)
+admin.site.register(List)
+admin.site.register(Note)

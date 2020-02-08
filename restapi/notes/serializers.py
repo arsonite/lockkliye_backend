@@ -1,13 +1,29 @@
 from rest_framework import serializers
 
-"""
-class ActionSerializer(serializers.Serializer):
+
+class LabelSerializer(serializers.Serializer):
     id = serializers.CharField()
-    rank = serializers.IntegerField()
-    maxRank = serializers.IntegerField()
-    percentage = serializers.DecimalField(max_digits=12, decimal_places=8)
-    imagepath = serializers.CharField()
-    timestamp = serializers.DateTimeField()
-    objectlabel = serializers.CharField()
-    obj = ObjectSerializer()
-"""
+    color = serializers.CharField()
+    title = serializers.CharField()
+    description = serializers.CharField()
+
+
+class ListSerializer(serializers.Serializer):
+    id = serializers.CharField()
+    title = serializers.CharField()
+    labels = LabelSerializer()
+
+
+class NoteSerializer(serializers.Serializer):
+    id = serializers.CharField()
+    title = serializers.CharField()
+    content = serializers.CharField()
+    labels = LabelSerializer()
+
+
+class FolderSerializer(serializers.Serializer):
+    id = serializers.CharField()
+    title = serializers.CharField()
+    #subfolders = FolderSerializer()
+    notes = NoteSerializer()
+    lists = ListSerializer()

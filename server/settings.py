@@ -22,7 +22,7 @@ INSTALLED_APPS = [
 
     'restapi.notes.apps.NotesConfig',
     'restapi.server.apps.ServerConfig',
-    'restapi.workbench.apps.Workbenchonfig',
+    'restapi.workbench.apps.WorkbenchConfig',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +37,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'lockkliye_restapi.urls'
+ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
     {
@@ -55,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'lockkliye_restapi.wsgi.application'
+WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
