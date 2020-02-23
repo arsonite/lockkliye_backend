@@ -23,6 +23,7 @@ services:
         depends_on:
             - db
         env_file:
+            - ./.env
             - ./.env.dev
         image: lockkliye_restapi
         networks:

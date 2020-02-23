@@ -1,3 +1,5 @@
 #!/bin/sh
 
-sh ../createNetwork.sh && sh build.sh && docker-compose -f ../../../docker-compose.prod.yml up
+# Builds and starts the container with the custom file flag -f
+sh build.sh
+docker-compose -f ../../../docker-compose.prod.yml up

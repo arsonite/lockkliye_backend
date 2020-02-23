@@ -1,11 +1,11 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from . import views
+from . import ressource, ressources
 
 urlpatterns = [
-    path('', views.Notes.as_view()),
-    path('<str:pk>/', views.Note.as_view())
+    path('', ressources.Notes.as_view()),
+    path('<str:pk>/', ressource.Note.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

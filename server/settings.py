@@ -7,7 +7,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'foo')
 DEBUG = int(os.environ.get('DEBUG', 1))
 
 ALLOWED_HOSTS = os.environ.get(
-    'DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1').split(' ')
+    'DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,8 +21,8 @@ INSTALLED_APPS = [
     'sslserver',
 
     'restapi.notes.apps.NotesConfig',
-    'restapi.server.apps.ServerConfig',
-    'restapi.workbench.apps.WorkbenchConfig',
+    # 'restapi.server.apps.ServerConfig',
+    # 'restapi.workbench.apps.WorkbenchConfig',
 ]
 
 MIDDLEWARE = [
