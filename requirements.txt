@@ -4,7 +4,7 @@ django-cors-headers==3.2.1
 django-sslserver==0.22
 djangorestframework==3.11.0
 numpy==1.18.1
-Pillow==7.0.0
+Pillow==8.1.1
 requests==2.22.0
 psycopg2==2.8.4
 pytz==2019.3
